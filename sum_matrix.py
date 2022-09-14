@@ -11,7 +11,6 @@ def calculate():
                 f_out.write(f"+ 계산 불가")
             else:   # 두 행렬의 차원이 같으므로 +계산을 한 뒤, 파일에 저장 합니다.
                 result = [[m1[i][j] + m2[i][j] for j in range(int(set_m1[2]))] for i in range(int(set_m1[1]))]
-                print(result)
                 for i in range(int(set_m1[1])):
                     for j in range(int(set_m1[2])):
                         f_out.write(str(result[i][j]) + ' ')
