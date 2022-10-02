@@ -1,11 +1,12 @@
 def load_matrix(r):
     with open("Input.txt", "rt") as f_in:
         matrix = [list(map(int, f_in.readline().split())) for _ in range(r)]
-        if r != len(matrix[1]):
-            print("Non-square matrix")
-        else:
-            print("계산 가능")
-            return cal_sub(matrix)
+        for i in range(r):
+            if r != len(matrix[i]):
+                print("Non-square matrix")
+                return None
+        print("계산 가능")
+        return cal_sub(matrix)
 
 
 def cal_sub(m):
