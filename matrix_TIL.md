@@ -1,3 +1,3 @@
 # Matrix 
-Lecture 1.
+Lecture 
 
