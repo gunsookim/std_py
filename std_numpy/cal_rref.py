@@ -30,13 +30,14 @@ def cal_rref(m):
     for r in range(idx_r):
         for c in range(idx_c - 1):
             if mat[r][c] != 0:
-                ero = [mat[r][i] / mat[r][c] for i in range(idx_c)]
+                ero = [mat[r][i] / mat[r][c] if mat[r][i] else 0 for i in range(idx_c)]
                 rref[r][:] = ero
                 show_mat(rref, r+1, r+1, mat[r][c], 3)
                 mat[r][:] = ero
                 break
     return mat
     # mat과 크기가 같은 단위행렬 생성
+
 
 def show_mat(em, r1, r2, mul, check):
     if check == 1:
@@ -49,8 +50,8 @@ def show_mat(em, r1, r2, mul, check):
         print("RREF 결과")
     for i in range(len(em)):            # 세로 크기
         for j in range(len(em[i])-1):     # 가로 크기
-            print(round(em[i][j], 3), end=' ')
-        print(f"| {round(em[i][-1], 3)}")
+            print("%-10f" % round(em[i][j], 3), end=' ')
+        print("| %10f" % round(em[i][-1], 3))
     print()
 
 
@@ -65,7 +66,6 @@ if __name__ == '__main__':
                     set_matrix = f.readline().split()
                     eq = set_matrix[0]
                     unk_v = set_matrix[1]
-                    print(f"Equation 수: {eq}, Unknown Vector 수: {unk_v}")
                     pos = f.tell()
                     rows = len(f.readlines())
                     f.seek(pos)
@@ -74,13 +74,19 @@ if __name__ == '__main__':
             except FileNotFoundError:
                 print("없는 파일입니다.")
         aug_matrix = [item[:] for item in matrix]
+        unk_v = int(unk_v) + 1
+        if len(matrix[0]) != unk_v:
+            print("잘못된 행렬입니다.")
+            continue
+        print(f"Equation 수: {eq}, Unknown Vector 수: {unk_v}")
+        print("소수점 5자리까지 출력합니다.")
         #   Augmented matrix 출력
         print("Augmented matrix: ")
         for i in range(rows):
             aug_matrix[i].insert(int(unk_v) - 1, '|')
         for i in aug_matrix:
             for j in i:
-                print(j, end=" ")
+                print("%7s" % j, end=" ")
             print()
         print()
         aug_matrix = cal_rref(matrix)
