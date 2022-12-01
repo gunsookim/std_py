@@ -74,8 +74,7 @@ if __name__ == '__main__':
             except FileNotFoundError:
                 print("없는 파일입니다.")
         aug_matrix = [item[:] for item in matrix]
-        unk_v = int(unk_v) + 1
-        if len(matrix[0]) != unk_v:
+        if len(matrix[0]) != unk_v - 1:
             print("잘못된 행렬입니다.")
             continue
         print(f"Equation 수: {eq}, Unknown Vector 수: {unk_v}")
